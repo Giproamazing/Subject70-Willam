@@ -53,6 +53,31 @@
             color: blue;
             text-decoration: underline;
         }
+        #status {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+        #footer-box {
+            background-color: grey;
+            color: black;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.9em;
+            z-index: 1000; /* Ensure it stays on top of other elements */
+        }
+        /* Dynamic Status Colors */
+        .status-success {
+            color: green;
+        }
+        .status-warning {
+            color: orange;
+        }
+        .status-error {
+            color: red;
+        }
         /* Fake classes to confuse inspectors */
         .not-in-use {
             display: none;
@@ -67,21 +92,11 @@
             border: none;
             color: black; /* Text color changed to black */
         }
-        #footer-box {
-            background-color: grey;
-            color: black;
-            padding: 15px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 0.9em;
-            z-index: 1000; /* Ensure it stays on top of other elements */
-        }
     </style>
 </head>
 <body>
     <div id="countdown">Countdown: <span id="countdown-timer">Loading...</span></div>
+    <div id="status">Status: <span id="status-text">Loading...</span></div>
     <div id="login">Log In</div>
     <div class="real-input">
         <input type="text" id="input-box" placeholder="Enter password">
@@ -105,7 +120,8 @@
             const correctPassword = "YJHAS"; // Correct password
             const redirectUrlClickHere = "https://giproamazing.github.io/Click-here/";
             const redirectUrlCentDecem = "https://giproamazing.github.io/CentDecem/";
-            const redirectUrlTHTEEIEHHTEEEHHRETTTEINTNENT = "https://giproamazing.github.io/Thisiswereeverthinggetsspicy/"; // Updated URL
+            const redirectUrlTHTEEIEHHTEEEHHRETTTEINTNENT = "https://giproamazing.github.io/Thisiswereeverthinggetsspicy/";
+            const redirectUrlSwagydotcom = "https://giproamazing.github.io/Swagycoolisfunbutthosisnotfunnyyoucamethisfatwhilefresrinhaasherdotcom/";
 
             document.getElementById('enter-button').addEventListener('click', function() {
                 const inputValue = document.getElementById('input-box').value;
@@ -118,6 +134,8 @@
                     window.location.href = redirectUrlCentDecem;
                 } else if (inputValue === "THTEEIEHHTEEEHHRETTTEINTNENT") {
                     window.location.href = redirectUrlTHTEEIEHHTEEEHHRETTTEINTNENT;
+                } else if (inputValue === "swagydotcom") {
+                    window.location.href = redirectUrlSwagydotcom;
                 }
             });
 
@@ -145,7 +163,33 @@
             }
 
             setInterval(updateCountdown, 1000);
+
+            // Status update function
+            function updateStatus() {
+                const now = new Date();
+                const startDate = new Date('2024-08-27T00:00:00Z'); // Start date
+                const endDate = new Date('2024-09-07T00:00:00Z'); // End date
+                const daysPassed = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+                const statusText = document.getElementById('status-text');
+
+                if (now > endDate) {
+                    statusText.textContent = "The event has ended.";
+                    statusText.className = 'status-error';
+                } else if (daysPassed % 5 === 0) { // Change status every 5 days
+                    statusText.textContent = "Status: Failed";
+                    statusText.className = 'status-warning';
+                } else if (daysPassed % 3 === 0) { // Change status every 3 days
+                    statusText.textContent = "Status: Success";
+                    statusText.className = 'status-success';
+                } else { // Default status
+                    statusText.textContent = "Status: Dangerous";
+                    statusText.className = 'status-warning';
+                }
+            }
+
+            updateStatus(); // Initial status update
+            setInterval(updateStatus, 86400000); // Update status every 24 hours
         })();
     </script>
 </body>
-</html>
+    </html>
