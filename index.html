@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website</title>
+    <title>Confusing Web Page</title>
     <style>
         body {
             background-color: black;
@@ -11,14 +11,10 @@
             font-family: Arial, sans-serif;
             text-align: center;
         }
-        .hidden {
-            display: none;
-        }
-        .fake-text, .input-container, .confirmation {
-            display: none;
-        }
-        .input-container {
-            margin-top: 20px;
+        #countdown {
+            font-size: 1.2em;
+            color: white;
+            margin: 20px 0;
         }
         #input-box {
             width: 300px;
@@ -28,47 +24,84 @@
             color: white;
             text-align: center;
         }
+        #enter-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            background-color: white;
+            color: black;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+        }
+        #confirm-button {
+            display: none;
+            margin-top: 20px;
+            color: green;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        #message {
+            display: none;
+            font-size: 1.5em;
+            color: red;
+        }
+        #link {
+            display: none;
+            color: blue;
+            text-decoration: underline;
+        }
+        /* Fake classes to confuse inspectors */
+        .not-in-use {
+            display: none;
+        }
+        .hidden-element {
+            opacity: 0;
+            visibility: hidden;
+        }
+        /* Multiple classes with no impact */
+        .class1, .class2, .class3 {
+            background-color: transparent;
+            border: none;
+            color: black; /* Text color changed to black */
+        }
     </style>
 </head>
 <body>
     <div id="countdown">Countdown: <span id="countdown-timer">Loading...</span></div>
-    <div id="login" class="hidden">Log In</div>
-    <div class="input-container hidden">
+    <div id="login">Log In</div>
+    <div class="real-input">
         <input type="text" id="input-box" placeholder="Enter password">
         <button id="enter-button">Enter</button>
     </div>
-    <div class="fake-text hidden">
-        <!-- Obfuscated or misleading content here -->
-    </div>
-    <div class="confirmation hidden" id="confirm-button">Are you sure to continue?</div>
+    <div id="confirm-button">Are you sure to continue?</div>
+    <div id="message">You failed to solve, thanks for wasting the time</div>
+
+    <!-- Fake elements to mislead inspectors -->
+    <div class="not-in-use">Fake Content 1</div>
+    <div class="hidden-element">Fake Content 2</div>
+    <input type="text" class="class1 class2 class3" placeholder="This is not used">
+    <input type="password" class="class1 class2" placeholder="Neither is this">
+    <button class="not-in-use">Fake Button</button>
+
     <script>
         (function(){
-            const hiddenKey = "secretKey123";
-            const correctPassword = "YJHAS";
+            const correctPassword = "YJHAS"; // Correct password
             const redirectUrl = "https://giproamazing.github.io/Click-here/";
-            
-            function revealHiddenContent() {
-                const elements = document.querySelectorAll('.hidden');
-                elements.forEach(el => el.classList.remove('hidden'));
-            }
-
-            function handlePassword(input) {
-                if (input === correctPassword) {
-                    document.querySelector('.fake-text').style.display = 'block';
-                    document.getElementById('confirm-button').style.display = 'block';
-                } else if (input.toLowerCase() === "click here") {
-                    window.location.href = redirectUrl;
-                }
-            }
 
             document.getElementById('enter-button').addEventListener('click', function() {
                 const inputValue = document.getElementById('input-box').value;
-                handlePassword(inputValue);
+                if (inputValue === correctPassword) {
+                    document.getElementById('confirm-button').style.display = 'block';
+                } else if (inputValue.toLowerCase() === "click here") {
+                    window.location.href = redirectUrl;
+                }
             });
 
-            // Reveal hidden content after a delay or specific action
-            setTimeout(revealHiddenContent, 1000);  // Example: Reveal after 1 second
-            
+            document.getElementById('confirm-button').addEventListener('click', function() {
+                window.location.href = 'https://giproamazing.github.io/ThiswebsiteisforciphersolversandplaintextsopversidontreccomendyounonsmsrtypsntstotrythewebsiteLol/';
+            });
+
             // Countdown function
             const countdownEndDate = new Date('2024-09-07T00:00:00Z').getTime();
             function updateCountdown() {
