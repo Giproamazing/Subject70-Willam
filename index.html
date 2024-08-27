@@ -10,6 +10,8 @@
             color: white;
             font-family: Arial, sans-serif;
             text-align: center;
+            margin: 0;
+            padding: 0;
         }
         #countdown {
             font-size: 1.2em;
@@ -65,6 +67,16 @@
             border: none;
             color: black; /* Text color changed to black */
         }
+        #footer-box {
+            background-color: grey;
+            color: black;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
@@ -77,6 +89,9 @@
     <div id="confirm-button">Are you sure to continue?</div>
     <div id="message">You failed to solve, thanks for wasting the time</div>
 
+    <!-- Footer Box with the message -->
+    <div id="footer-box">This website is very busy; expect it to break sometimes. It's because we are updating. Keep solving!</div>
+
     <!-- Fake elements to mislead inspectors -->
     <div class="not-in-use">Fake Content 1</div>
     <div class="hidden-element">Fake Content 2</div>
@@ -87,14 +102,18 @@
     <script>
         (function(){
             const correctPassword = "YJHAS"; // Correct password
-            const redirectUrl = "https://giproamazing.github.io/Click-here/";
+            const redirectUrlClickHere = "https://giproamazing.github.io/Click-here/";
+            const redirectUrlCentDecem = "https://giproamazing.github.io/CentDecem/";
 
             document.getElementById('enter-button').addEventListener('click', function() {
                 const inputValue = document.getElementById('input-box').value;
+                
                 if (inputValue === correctPassword) {
                     document.getElementById('confirm-button').style.display = 'block';
                 } else if (inputValue.toLowerCase() === "click here") {
-                    window.location.href = redirectUrl;
+                    window.location.href = redirectUrlClickHere;
+                } else if (inputValue === "CentDecem") {
+                    window.location.href = redirectUrlCentDecem;
                 }
             });
 
